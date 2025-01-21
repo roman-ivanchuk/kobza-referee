@@ -1,0 +1,48 @@
+﻿// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+// Editor: https://dbdiagram.io
+
+Table TelegramChats {
+  id string [primary key, not null]
+  PartitionKey string [not null]
+  Type string [not null]
+  Title string [null]
+  Username string [null]
+  FirstName string [null]
+  LastName string [null]
+  IsForum bool [null]
+}
+
+Table TelegramUsers {
+  id string [primary key]
+  PartitionKey string
+  IsBot bool
+  FirstName string
+  LastName string
+  Username string
+  LanguageCode string
+}
+
+
+Table WordGuess {
+  id string [primary key]
+  PartitionKey string
+  UserId string [ref: > TelegramUsers.id]
+  ChatId string [ref: > TelegramChats.id]
+  Date timestamp
+
+  Guesses list [ref: < WordGuess.GuessDetails.Id]
+}
+
+Table WordGuess.GuessDetails {
+  Id Guid [primary key]
+  AttemptNumber integer
+
+  LetterDetails list [ref: < WordGuess.LetterDetails.Id]
+}
+
+Table WordGuess.LetterDetails {
+  Id Guid [primary key]
+  Position integer
+  LetterStatus string
+}

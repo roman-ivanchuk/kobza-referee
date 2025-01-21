@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Telegram.Bot" Version="22.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KobzaReferee.Application\KobzaReferee.Application.csproj" />
+    <ProjectReference Include="..\KobzaReferee.Domain\KobzaReferee.Domain.csproj" />
+    <ProjectReference Include="..\KobzaReferee.Persistence.Cosmos\KobzaReferee.Persistence.Cosmos.csproj" />
+  </ItemGroup>
+
+</Project>
