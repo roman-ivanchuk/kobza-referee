@@ -1,0 +1,19 @@
+﻿using KobzaReferee.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace KobzaReferee.Persistence.Sqlite.Configurations;
+
+public class LetterDetailConfiguration : IEntityTypeConfiguration<LetterDetail>
+{
+    public void Configure(EntityTypeBuilder<LetterDetail> builder)
+    {
+        builder.HasKey(ld => ld.Id);
+
+        builder.Property(ld => ld.Position)
+            .IsRequired();
+
+        builder.Property(ld => ld.LetterStatus)
+            .IsRequired();
+    }
+}

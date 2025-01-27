@@ -4,8 +4,6 @@ public class TournamentParticipantStatistics
 {
     public Guid Id { get; set; }
 
-    public string UserId { get; set; } = string.Empty;
-
     /// <summary>
     /// The participant's position in the overall tournament standings.
     /// </summary>
@@ -31,6 +29,12 @@ public class TournamentParticipantStatistics
     /// Each entry maps a date to the score achieved on that date.
     /// </summary>
     public Dictionary<DateTime, int> ScoreByDate { get; set; } = new();
+
+    public string UserId { get; set; } = string.Empty;
+    public TelegramUser User { get; set; } = default!;
+
+    public string TournamentStatisticsId { get; set; } = string.Empty;
+    public TournamentStatistics TournamentStatistics { get; set; } = default!;
 
     public TournamentParticipantStatistics() { }
 

@@ -7,4 +7,7 @@ public class LetterDetail
     public int Position { get; set; }
 
     public string LetterStatus { get; set; } = string.Empty;
+
+    public Guid GuessDetailId { get; set; }
+    public GuessDetail GuessDetail { get; set; } = default!;
 }

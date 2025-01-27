@@ -15,4 +15,9 @@ public class TelegramChat : EntityBase
     public string? LastName { get; set; }
 
     public bool? IsForum { get; set; }
+
+    public ICollection<WordGuess> WordGuesses { get; set; }
+        = new List<WordGuess>();
+    public ICollection<TournamentStatistics> TournamentStatistics { get; set; }
+        = new List<TournamentStatistics>();
 }

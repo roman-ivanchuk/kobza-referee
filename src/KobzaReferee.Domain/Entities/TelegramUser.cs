@@ -13,4 +13,9 @@ public class TelegramUser : EntityBase
     public string? Username { get; set; }
 
     public string? LanguageCode { get; set; }
+
+    public ICollection<WordGuess> WordGuesses { get; set; }
+        = new List<WordGuess>();
+    public ICollection<TournamentParticipantStatistics> TournamentParticipantStatistics { get; set; }
+        = new List<TournamentParticipantStatistics>();
 }
