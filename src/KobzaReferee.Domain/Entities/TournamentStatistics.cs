@@ -34,12 +34,4 @@ public class TournamentStatistics : EntityBase
 
     public ICollection<TournamentParticipantStatistics> Standings { get; set; }
         = new List<TournamentParticipantStatistics>();
-
-    public TournamentStatistics() { }
-
-    public TournamentStatistics(string chatId)
-    {
-        Id = Guid.NewGuid().ToString();
-        ChatId = chatId;
-    }
 }

@@ -1,10 +1,7 @@
-﻿using KobzaReferee.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿namespace KobzaReferee.Persistence.Sqlite.Configurations;
 
-namespace KobzaReferee.Persistence.Sqlite.Configurations;
-
-public class LetterDetailConfiguration : IEntityTypeConfiguration<LetterDetail>
+public class LetterDetailConfiguration
+    : IEntityTypeConfiguration<LetterDetail>
 {
     public void Configure(EntityTypeBuilder<LetterDetail> builder)
     {
@@ -12,6 +9,7 @@ public class LetterDetailConfiguration : IEntityTypeConfiguration<LetterDetail>
 
         builder.Property(ld => ld.Id)
             .HasConversion<string>()
+            .HasMaxLength(DataSchemaConstants.GUID_LENGTH)
             .IsRequired();
 
         builder.Property(ld => ld.Position)
@@ -22,6 +20,7 @@ public class LetterDetailConfiguration : IEntityTypeConfiguration<LetterDetail>
 
         builder.Property(ld => ld.GuessDetailId)
             .HasConversion<string>()
+            .HasMaxLength(DataSchemaConstants.GUID_LENGTH)
             .IsRequired();
     }
 }

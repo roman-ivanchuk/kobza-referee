@@ -1,24 +1,30 @@
-﻿using KobzaReferee.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿namespace KobzaReferee.Persistence.Sqlite.Configurations;
 
-namespace KobzaReferee.Persistence.Sqlite.Configurations;
-
-internal class TelegramUserConfiguration : IEntityTypeConfiguration<TelegramUser>
+internal class TelegramUserConfiguration
+    : IEntityTypeConfiguration<TelegramUser>
 {
     public void Configure(EntityTypeBuilder<TelegramUser> builder)
     {
-        builder.HasKey(u => u.Id);
+        builder.HasKey(tu => tu.Id);
 
-        builder.Property(u => u.FirstName)
+        builder.Property(tu => tu.Id)
+            .ValueGeneratedNever()
+            .HasConversion<long>()
             .IsRequired();
 
-        builder.HasMany(u => u.WordGuesses)
-            .WithOne(wg => wg.User)
-            .HasForeignKey(wg => wg.UserId);
+        builder.Property(tu => tu.FirstName)
+            .IsRequired();
 
-        builder.HasMany(u => u.TournamentParticipantStatistics)
+        builder.HasMany(tu => tu.WordGuesses)
             .WithOne(wg => wg.User)
-            .HasForeignKey(wg => wg.UserId);
+            .HasForeignKey(wg => wg.UserId)
+            .OnDelete(DeleteBehavior.Cascade)
+            .IsRequired();
+
+        builder.HasMany(tu => tu.TournamentParticipantStatistics)
+            .WithOne(wg => wg.User)
+            .HasForeignKey(wg => wg.UserId)
+            .OnDelete(DeleteBehavior.Cascade)
+            .IsRequired();
     }
 }

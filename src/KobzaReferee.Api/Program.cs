@@ -2,6 +2,7 @@ using KobzaReferee.Api.Middlewares;
 using KobzaReferee.Application.Services;
 using KobzaReferee.Domain.Options;
 using KobzaReferee.Persistence.Cosmos;
+using KobzaReferee.Persistence.Sqlite;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
@@ -24,6 +25,7 @@ builder.Services.AddHttpClient("telegram_bot_client")
 builder.Services.AddTransient<ValidateTelegramBotMiddleware>();
 
 await builder.Services.AddCosmosPersistenceAsync(builder.Configuration);
+builder.Services.AddSqlitePersistence();
 
 builder.Services.AddTransient<WordGuessService>();
 builder.Services.AddTransient<StandingsService>();

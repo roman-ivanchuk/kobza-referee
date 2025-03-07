@@ -1,11 +1,9 @@
-﻿using KobzaReferee.Domain.Entities;
-using KobzaReferee.Persistence.Sqlite.Configurations;
-using Microsoft.EntityFrameworkCore;
+﻿namespace KobzaReferee.Persistence.Sqlite;
 
-namespace KobzaReferee.Persistence.Sqlite;
-
-internal class AppDbContext : DbContext
+public class ApplicationDbContext : DbContext
 {
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+
     public DbSet<TelegramUser> TelegramUsers => Set<TelegramUser>();
     public DbSet<TelegramChat> TelegramChats => Set<TelegramChat>();
     public DbSet<WordGuess> WordGuesses => Set<WordGuess>();

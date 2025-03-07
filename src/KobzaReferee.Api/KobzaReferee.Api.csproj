@@ -14,6 +14,7 @@
     <ProjectReference Include="..\KobzaReferee.Application\KobzaReferee.Application.csproj" />
     <ProjectReference Include="..\KobzaReferee.Domain\KobzaReferee.Domain.csproj" />
     <ProjectReference Include="..\KobzaReferee.Persistence.Cosmos\KobzaReferee.Persistence.Cosmos.csproj" />
+    <ProjectReference Include="..\KobzaReferee.Persistence.Sqlite\KobzaReferee.Persistence.Sqlite.csproj" />
   </ItemGroup>
 
 </Project>

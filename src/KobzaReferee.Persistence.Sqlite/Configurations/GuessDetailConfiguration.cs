@@ -1,10 +1,7 @@
-﻿using KobzaReferee.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿namespace KobzaReferee.Persistence.Sqlite.Configurations;
 
-namespace KobzaReferee.Persistence.Sqlite.Configurations;
-
-internal class GuessDetailConfiguration : IEntityTypeConfiguration<GuessDetail>
+internal class GuessDetailConfiguration
+    : IEntityTypeConfiguration<GuessDetail>
 {
     public void Configure(EntityTypeBuilder<GuessDetail> builder)
     {
@@ -12,18 +9,20 @@ internal class GuessDetailConfiguration : IEntityTypeConfiguration<GuessDetail>
 
         builder.Property(gd => gd.Id)
             .HasConversion<string>()
+            .HasMaxLength(DataSchemaConstants.GUID_LENGTH)
             .IsRequired();
 
         builder.Property(gd => gd.AttemptNumber)
             .IsRequired();
 
         builder.Property(gd => gd.WordGuessId)
-            .HasConversion<string>()
+            .HasMaxLength(DataSchemaConstants.GUID_LENGTH)
             .IsRequired();
 
         builder.HasMany(gd => gd.LetterDetails)
             .WithOne(ld => ld.GuessDetail)
             .HasForeignKey(ld => ld.GuessDetailId)
+            .OnDelete(DeleteBehavior.Cascade)
             .IsRequired();
     }
 }

@@ -1,11 +1,9 @@
-﻿using KobzaReferee.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.Text.Json;
+﻿using System.Text.Json;
 
 namespace KobzaReferee.Persistence.Sqlite.Configurations;
 
-internal class TournamentParticipantStatisticsConfiguration : IEntityTypeConfiguration<TournamentParticipantStatistics>
+internal class TournamentParticipantStatisticsConfiguration
+    : IEntityTypeConfiguration<TournamentParticipantStatistics>
 {
     public void Configure(EntityTypeBuilder<TournamentParticipantStatistics> builder)
     {
@@ -13,6 +11,7 @@ internal class TournamentParticipantStatisticsConfiguration : IEntityTypeConfigu
 
         builder.Property(tps => tps.Id)
             .HasConversion<string>()
+            .HasMaxLength(DataSchemaConstants.GUID_LENGTH)
             .IsRequired();
 
         builder.Property(tps => tps.StandingsPosition)
@@ -21,23 +20,24 @@ internal class TournamentParticipantStatisticsConfiguration : IEntityTypeConfigu
         builder.Property(tps => tps.PointsForStanding)
             .IsRequired();
 
-        builder.Property(tps => tps.AverageGuessTime)
-            .HasConversion<long>()
-            .IsRequired();
-
         builder.Property(tps => tps.TournamentScore)
             .IsRequired();
 
-        builder.Property(tps => tps.UserId)
-            .HasConversion<string>()
-            .IsRequired();
-
-        builder.Property(tps => tps.TournamentStatisticsId)
-            .HasConversion<string>()
+        builder.Property(tps => tps.AverageGuessTime)
+            .HasConversion(v => v.TotalSeconds, v => TimeSpan.FromSeconds(v))
             .IsRequired();
 
         builder.Property(tps => tps.ScoreByDate)
             .HasConversion(sbd => Serialize(sbd), sbd => Deserialize(sbd))
+            .IsRequired();
+
+        builder.Property(tps => tps.UserId)
+            .HasConversion<long>()
+            .IsRequired();
+
+        builder.Property(tps => tps.TournamentStatisticsId)
+            .HasConversion<string>()
+            .HasMaxLength(DataSchemaConstants.GUID_LENGTH)
             .IsRequired();
     }
 
