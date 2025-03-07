@@ -10,10 +10,18 @@ public class LetterDetailConfiguration : IEntityTypeConfiguration<LetterDetail>
     {
         builder.HasKey(ld => ld.Id);
 
+        builder.Property(ld => ld.Id)
+            .HasConversion<string>()
+            .IsRequired();
+
         builder.Property(ld => ld.Position)
             .IsRequired();
 
         builder.Property(ld => ld.LetterStatus)
+            .IsRequired();
+
+        builder.Property(ld => ld.GuessDetailId)
+            .HasConversion<string>()
             .IsRequired();
     }
 }

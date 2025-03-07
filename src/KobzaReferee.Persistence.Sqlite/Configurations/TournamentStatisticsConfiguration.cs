@@ -10,19 +10,23 @@ internal class TournamentStatisticsConfiguration : IEntityTypeConfiguration<Tour
     {
         builder.HasKey(ts => ts.Id);
 
-        builder.Property(ts => ts.StandingsChatMessageId)
-            .IsRequired();
+        builder.Property(ts => ts.StandingsChatMessageId);
 
-        builder.Property(ts => ts.SummaryChatMessageId)
-            .IsRequired();
+        builder.Property(ts => ts.SummaryChatMessageId);
 
         builder.Property(ts => ts.StartDate)
+            .HasConversion<long>()
             .IsRequired();
 
         builder.Property(ts => ts.EndDate)
+            .HasConversion<long>()
             .IsRequired();
 
         builder.Property(ts => ts.AllDailyWordGuessesSubmitted)
+            .IsRequired();
+
+        builder.Property(ts => ts.Id)
+            .HasConversion<string>()
             .IsRequired();
 
         builder.HasMany(ts => ts.Standings)

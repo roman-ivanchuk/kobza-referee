@@ -10,7 +10,15 @@ internal class GuessDetailConfiguration : IEntityTypeConfiguration<GuessDetail>
     {
         builder.HasKey(gd => gd.Id);
 
+        builder.Property(gd => gd.Id)
+            .HasConversion<string>()
+            .IsRequired();
+
         builder.Property(gd => gd.AttemptNumber)
+            .IsRequired();
+
+        builder.Property(gd => gd.WordGuessId)
+            .HasConversion<string>()
             .IsRequired();
 
         builder.HasMany(gd => gd.LetterDetails)
