@@ -1,8 +1,8 @@
 ﻿namespace KobzaReferee.Persistence.Cosmos.Repositories;
 
-public class TelegramChatRepository : Repository<TelegramChat>, ITelegramChatRepository
+internal class TelegramChatRepository : Repository<TelegramChat>, ITelegramChatRepository
 {
-    public TelegramChatRepository(
+    internal TelegramChatRepository(
         CosmosClient cosmosClient,
         IOptions<AzureCosmosDbAccountOptions> options)
         : base(cosmosClient, options) { }

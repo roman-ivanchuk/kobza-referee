@@ -1,8 +1,8 @@
 ﻿namespace KobzaReferee.Persistence.Cosmos.Repositories;
 
-public class TournamentStatisticsRepository : Repository<TournamentStatistics>, ITournamentStatisticsRepository
+internal class TournamentStatisticsRepository : Repository<TournamentStatistics>, ITournamentStatisticsRepository
 {
-    public TournamentStatisticsRepository(
+    internal TournamentStatisticsRepository(
         CosmosClient cosmosClient,
         IOptions<AzureCosmosDbAccountOptions> options)
         : base(cosmosClient, options) { }

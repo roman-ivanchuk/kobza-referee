@@ -6,22 +6,12 @@ namespace KobzaReferee.Application.Services;
 public sealed class WordGuessService
 {
     private readonly ILogger<WordGuessService> _logger;
+    private readonly IUnitOfWork _unitOfWork;
 
-    private readonly ITelegramChatRepository _telegramChatRepository;
-    private readonly ITelegramUserRepository _telegramUserRepository;
-    private readonly IWordGuessRepository _wordGuessRepository;
-
-    public WordGuessService(
-        ILogger<WordGuessService> logger,
-        ITelegramChatRepository telegramChatRepository,
-        ITelegramUserRepository telegramUserRepository,
-        IWordGuessRepository wordGuessRepository)
+    public WordGuessService(ILogger<WordGuessService> logger, IUnitOfWork unitOfWork)
     {
         _logger = logger;
-
-        _telegramChatRepository = telegramChatRepository;
-        _telegramUserRepository = telegramUserRepository;
-        _wordGuessRepository = wordGuessRepository;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<WordGuess> SubmitAsync(
@@ -64,7 +54,7 @@ public sealed class WordGuessService
         wordGuess.UserId = telegramUser.Id;
 
 
-        var wordGuesses = await _wordGuessRepository.GetAllAndMapAsync(
+        var wordGuesses = await _unitOfWork.WordGuesses.GetAllAndMapAsync(
             selector: f => f.Id,
             predicate: f => f.UserId == wordGuess.UserId && f.Date == wordGuess.Date,
             cancellationToken: cancellationToken);
@@ -74,7 +64,7 @@ public sealed class WordGuessService
             throw new InvalidOperationException("A Kobza result for the specified date and user already exists.");
         }
 
-        var result = await _wordGuessRepository.CreateAsync(wordGuess, cancellationToken);
+        var result = await _unitOfWork.WordGuesses.CreateAsync(wordGuess, cancellationToken);
 
         return result;
     }
@@ -95,7 +85,7 @@ public sealed class WordGuessService
             throw new ArgumentException("Cannot extract user from Telegram message.", nameof(message));
         }
 
-        var telegramUser = await _telegramUserRepository.GetByIdAsync(messageUser.Id.ToString(), cancellationToken: cancellationToken);
+        var telegramUser = await _unitOfWork.TelegramUsers.GetByIdAsync(messageUser.Id.ToString(), cancellationToken: cancellationToken);
         if (telegramUser is null)
         {
             telegramUser = new()
@@ -108,7 +98,7 @@ public sealed class WordGuessService
                 LanguageCode = messageUser.LanguageCode
             };
 
-            await _telegramUserRepository.CreateAsync(telegramUser, cancellationToken);
+            await _unitOfWork.TelegramUsers.CreateAsync(telegramUser, cancellationToken);
         }
 
         return telegramUser;
@@ -121,7 +111,7 @@ public sealed class WordGuessService
             throw new ArgumentException("Cannot extract chat from Telegram message.", nameof(message));
         }
 
-        var telegramChat = await _telegramChatRepository.GetByIdAsync(message.Chat.Id.ToString(), cancellationToken: cancellationToken);
+        var telegramChat = await _unitOfWork.TelegramChats.GetByIdAsync(message.Chat.Id.ToString(), cancellationToken: cancellationToken);
         if (telegramChat is null)
         {
             telegramChat = new()
@@ -135,7 +125,7 @@ public sealed class WordGuessService
                 Type = Domain.Common.Constants.ChatType.Validate(message.Chat.Type.ToString())
             };
 
-            await _telegramChatRepository.CreateAsync(telegramChat, cancellationToken);
+            await _unitOfWork.TelegramChats.CreateAsync(telegramChat, cancellationToken);
         }
 
         return telegramChat;

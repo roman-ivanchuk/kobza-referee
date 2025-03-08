@@ -6,9 +6,9 @@ using System.Net;
 
 namespace KobzaReferee.Persistence.Cosmos.Repositories._Base;
 
-public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : EntityBase
+internal abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : EntityBase
 {
-    protected Repository(
+    internal Repository(
         CosmosClient cosmosClient,
         IOptions<AzureCosmosDbAccountOptions> options)
     {

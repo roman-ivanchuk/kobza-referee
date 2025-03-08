@@ -8,27 +8,22 @@ public sealed class TelegramService
 {
     private readonly ITelegramBotClient _botClient;
     private readonly ILogger<TelegramService> _logger;
-
-    private readonly ITelegramUserRepository _telegramUserRepository;
-    private readonly ITournamentStatisticsRepository _tournamentStatisticsRepository;
     private readonly StandingsService _standingsService;
     private readonly WordGuessService _wordGuessService;
+    private readonly IUnitOfWork _unitOfWork;
 
     public TelegramService(
         ITelegramBotClient botClient,
         ILogger<TelegramService> logger,
-        ITelegramUserRepository telegramUserRepository,
-        ITournamentStatisticsRepository tournamentStatisticsRepository,
         StandingsService standingsService,
-        WordGuessService wordGuessService)
+        WordGuessService wordGuessService,
+        IUnitOfWork unitOfWork)
     {
         _botClient = botClient;
         _logger = logger;
-
-        _telegramUserRepository = telegramUserRepository;
-        _tournamentStatisticsRepository = tournamentStatisticsRepository;
         _standingsService = standingsService;
         _wordGuessService = wordGuessService;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task OnMessageReceived(Message message, CancellationToken cancellationToken)
@@ -49,7 +44,7 @@ public sealed class TelegramService
                 .ToList();
 
             // TODO: [FUTURE] Areas for improvement in the future if the number of users grows significantly.
-            var users = await _telegramUserRepository.GetAllAsync(cancellationToken: cancellationToken);
+            var users = await _unitOfWork.TelegramUsers.GetAllAsync(cancellationToken: cancellationToken);
 
             tournamentStatistics = await SendStandingsMessageAsync(
                 message: message,
@@ -115,7 +110,7 @@ public sealed class TelegramService
         }
 
         tournamentStatistics.StandingsChatMessageId = standingsMessage.MessageId;
-        tournamentStatistics = await _tournamentStatisticsRepository.SetStandingsChatMessageIdAsync(
+        tournamentStatistics = await _unitOfWork.TournamentStatistics.SetStandingsChatMessageIdAsync(
             value: tournamentStatistics,
             cancellationToken: cancellationToken);
 
@@ -128,7 +123,7 @@ public sealed class TelegramService
         List<TelegramUser> users,
         CancellationToken cancellationToken)
     {
-        var tournaments = await _tournamentStatisticsRepository.GetAllAsync(
+        var tournaments = await _unitOfWork.TournamentStatistics.GetAllAsync(
             partitionKeyValue: currentTournament.ChatId,
             predicate: ts => ts.AllDailyWordGuessesSubmitted,
             cancellationToken: cancellationToken);
@@ -163,7 +158,7 @@ public sealed class TelegramService
         }
 
         currentTournament.SummaryChatMessageId = summaryMessage.MessageId;
-        currentTournament = await _tournamentStatisticsRepository.SetSummaryChatMessageIdAsync(
+        currentTournament = await _unitOfWork.TournamentStatistics.SetSummaryChatMessageIdAsync(
             value: currentTournament,
             cancellationToken: cancellationToken);
 

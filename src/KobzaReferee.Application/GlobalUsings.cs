@@ -1,4 +1,5 @@
-﻿global using KobzaReferee.Application.Dtos;
+﻿global using KobzaReferee.Application.Common.Interfaces;
+global using KobzaReferee.Application.Dtos;
 global using KobzaReferee.Application.Helpers;
 global using KobzaReferee.Domain.Common.Constants;
 global using KobzaReferee.Domain.Statistics;

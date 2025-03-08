@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\KobzaReferee.Application\KobzaReferee.Application.csproj" />
     <ProjectReference Include="..\KobzaReferee.Domain\KobzaReferee.Domain.csproj" />
   </ItemGroup>
 

@@ -1,6 +1,6 @@
 ﻿namespace KobzaReferee.Persistence.Cosmos.Options;
 
-public class AzureCosmosDbAccountOptions
+internal class AzureCosmosDbAccountOptions
 {
     public static readonly string AzureCosmosDbAccount = "AzureCosmosDbAccount";
 
@@ -11,7 +11,7 @@ public class AzureCosmosDbAccountOptions
     public AzureCosmosDbAccountDatabaseOptions Database { get; set; } = new();
 }
 
-public class AzureCosmosDbAccountDatabaseOptions
+internal class AzureCosmosDbAccountDatabaseOptions
 {
     public string Name { get; set; } = string.Empty;
 
@@ -20,7 +20,7 @@ public class AzureCosmosDbAccountDatabaseOptions
     public List<AzureCosmosDbAccountDatabaseContainerOptions> Containers { get; set; } = new();
 }
 
-public class AzureCosmosDbAccountDatabaseContainerOptions
+internal class AzureCosmosDbAccountDatabaseContainerOptions
 {
     public string Id { get; set; } = string.Empty;
 

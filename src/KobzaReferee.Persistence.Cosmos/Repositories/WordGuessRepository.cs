@@ -1,8 +1,8 @@
 ﻿namespace KobzaReferee.Persistence.Cosmos.Repositories;
 
-public class WordGuessRepository : Repository<WordGuess>, IWordGuessRepository
+internal class WordGuessRepository : Repository<WordGuess>, IWordGuessRepository
 {
-    public WordGuessRepository(
+    internal WordGuessRepository(
         CosmosClient cosmosClient,
         IOptions<AzureCosmosDbAccountOptions> options)
         : base(cosmosClient, options) { }

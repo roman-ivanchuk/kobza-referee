@@ -3,19 +3,12 @@
 public sealed class StandingsService
 {
     private readonly ILogger<StandingsService> _logger;
+    private readonly IUnitOfWork _unitOfWork;
 
-    private readonly ITournamentStatisticsRepository _tournamentStatisticsRepository;
-    private readonly IWordGuessRepository _wordGuessRepository;
-
-    public StandingsService(
-        ILogger<StandingsService> logger,
-        ITournamentStatisticsRepository tournamentStatisticsRepository,
-        IWordGuessRepository wordGuessRepository)
+    public StandingsService(ILogger<StandingsService> logger, IUnitOfWork unitOfWork)
     {
         _logger = logger;
-
-        _wordGuessRepository = wordGuessRepository;
-        _tournamentStatisticsRepository = tournamentStatisticsRepository;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<TournamentStatistics> GetOrCreateTournamentAsync(
@@ -42,20 +35,20 @@ public sealed class StandingsService
         }
 
         // TODO: Fix in future: too many data need to make distinct on db side
-        var chatUserIds = await _wordGuessRepository.GetAllAndMapAsync(
+        var chatUserIds = await _unitOfWork.WordGuesses.GetAllAndMapAsync(
             selector: f => f.UserId,
             predicate: f => f.ChatId == chatId,
             cancellationToken: cancellationToken);
 
         chatUserIds = chatUserIds.Distinct().ToList();
 
-        var chatUsersWordGuesses = await _wordGuessRepository.GetAllAsync(
+        var chatUsersWordGuesses = await _unitOfWork.WordGuesses.GetAllAsync(
             predicate: f => chatUserIds.Contains(f.UserId) && f.Date >= tournament.StartDate && f.Date <= tournament.EndDate,
             cancellationToken: cancellationToken);
 
         tournament.Standings = StandingsCalculator.CalculateTournamentStandings(chatUsersWordGuesses);
 
-        var result = await _tournamentStatisticsRepository.UpsertAsync(
+        var result = await _unitOfWork.TournamentStatistics.UpsertAsync(
             value: tournament,
             cancellationToken: cancellationToken);
 
@@ -67,7 +60,7 @@ public sealed class StandingsService
         DateTime tournamentDate,
         CancellationToken cancellationToken)
     {
-        var tournaments = await _tournamentStatisticsRepository.GetAllAsync(
+        var tournaments = await _unitOfWork.TournamentStatistics.GetAllAsync(
             partitionKeyValue: chatId,
             predicate: tournament => tournamentDate >= tournament.StartDate && tournamentDate <= tournament.EndDate && tournament.ChatId == chatId,
             cancellationToken: cancellationToken);

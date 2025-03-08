@@ -10,10 +10,7 @@ public static class DependencyInjection
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlite("Data Source=app.db"));
 
-        //services.AddScoped<TelegramChatRepository>();
-        //services.AddScoped<TelegramUserRepository>();
-        //services.AddScoped<TournamentStatisticsRepository>();
-        //services.AddScoped<WordGuessRepository>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         return services;
     }

@@ -19,10 +19,7 @@ public static class DependencyInjection
 
         services.AddSingleton(cosmosClient);
 
-        services.AddScoped<TelegramChatRepository>();
-        services.AddScoped<TelegramUserRepository>();
-        services.AddScoped<TournamentStatisticsRepository>();
-        services.AddScoped<WordGuessRepository>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         return services;
     }
