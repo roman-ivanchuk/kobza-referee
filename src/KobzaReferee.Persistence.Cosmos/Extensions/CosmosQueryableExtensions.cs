@@ -1,5 +1,3 @@
-using Microsoft.Azure.Cosmos;
-
 namespace KobzaReferee.Persistence.Cosmos.Extensions;
 
 internal static class CosmosQueryableExtensions

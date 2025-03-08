@@ -1,6 +1,4 @@
-﻿using KobzaReferee.Domain.Entities._Base;
-
-namespace KobzaReferee.Domain.Entities;
+﻿namespace KobzaReferee.Domain.Statistics;
 
 public class TournamentStatistics : EntityBase
 {

@@ -1,7 +1,4 @@
-﻿using KobzaReferee.Domain.Options;
-using KobzaReferee.Persistence.Cosmos.Repositories;
-using Microsoft.Azure.Cosmos;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace KobzaReferee.Persistence.Cosmos;

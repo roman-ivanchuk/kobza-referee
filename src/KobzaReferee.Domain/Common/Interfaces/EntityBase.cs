@@ -1,4 +1,4 @@
-﻿namespace KobzaReferee.Domain.Entities._Base;
+﻿namespace KobzaReferee.Domain.Common.Interfaces;
 
 public abstract class EntityBase
 {

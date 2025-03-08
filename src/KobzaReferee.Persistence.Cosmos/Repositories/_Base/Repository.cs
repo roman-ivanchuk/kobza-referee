@@ -1,9 +1,6 @@
-﻿using KobzaReferee.Domain.Entities._Base;
-using KobzaReferee.Domain.Options;
+﻿using KobzaReferee.Domain.Common.Interfaces;
 using KobzaReferee.Persistence.Cosmos.Extensions;
-using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Cosmos.Linq;
-using Microsoft.Extensions.Options;
 using System.Linq.Expressions;
 using System.Net;
 

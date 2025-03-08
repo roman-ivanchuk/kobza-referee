@@ -1,4 +1,4 @@
-﻿namespace KobzaReferee.Domain.Options;
+﻿namespace KobzaReferee.Persistence.Cosmos.Options;
 
 public class AzureCosmosDbAccountOptions
 {

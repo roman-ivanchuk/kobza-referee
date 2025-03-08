@@ -1,4 +1,3 @@
-using KobzaReferee.Domain.Options;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -6,7 +5,7 @@ using Microsoft.Extensions.Options;
 using Telegram.Bot;
 using Telegram.Bot.Types.Enums;
 
-namespace KobzaReferee.Application.Services;
+namespace KobzaReferee.Infrastructure.BackgroundServices;
 
 public class TelegramWebhookService : IHostedService
 {

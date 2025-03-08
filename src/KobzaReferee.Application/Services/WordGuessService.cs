@@ -1,8 +1,4 @@
-﻿using KobzaReferee.Application.Helpers;
-using KobzaReferee.Domain.Constants;
-using KobzaReferee.Domain.Entities;
-using Microsoft.Extensions.Logging;
-using Telegram.Bot.Types;
+﻿using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
 namespace KobzaReferee.Application.Services;
@@ -136,7 +132,7 @@ public sealed class WordGuessService
                 Username = message.Chat.Username,
                 IsForum = message.Chat.IsForum,
                 Title = message.Chat.Title,
-                Type = Domain.Constants.ChatType.Validate(message.Chat.Type.ToString())
+                Type = Domain.Common.Constants.ChatType.Validate(message.Chat.Type.ToString())
             };
 
             await _telegramChatRepository.CreateAsync(telegramChat, cancellationToken);

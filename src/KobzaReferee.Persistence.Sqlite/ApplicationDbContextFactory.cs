@@ -9,7 +9,7 @@ public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<Applicati
         var connectionStringBuilder = new SqliteConnectionStringBuilder
         {
             DataSource = "your-database.db",
-            
+
         };
 
         var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();

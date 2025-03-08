@@ -7,12 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.2" />
     <PackageReference Include="Telegram.Bot" Version="22.3.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\KobzaReferee.Application\KobzaReferee.Application.csproj" />
     <ProjectReference Include="..\KobzaReferee.Domain\KobzaReferee.Domain.csproj" />
+    <ProjectReference Include="..\KobzaReferee.Infrastructure\KobzaReferee.Infrastructure.csproj" />
     <ProjectReference Include="..\KobzaReferee.Persistence.Cosmos\KobzaReferee.Persistence.Cosmos.csproj" />
     <ProjectReference Include="..\KobzaReferee.Persistence.Sqlite\KobzaReferee.Persistence.Sqlite.csproj" />
   </ItemGroup>

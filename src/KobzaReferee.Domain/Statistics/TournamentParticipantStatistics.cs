@@ -1,4 +1,4 @@
-﻿namespace KobzaReferee.Domain.Entities;
+﻿namespace KobzaReferee.Domain.Statistics;
 
 public class TournamentParticipantStatistics
 {

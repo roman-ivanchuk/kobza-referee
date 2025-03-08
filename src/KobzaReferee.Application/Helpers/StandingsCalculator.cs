@@ -1,8 +1,4 @@
-﻿using KobzaReferee.Application.Dtos;
-using KobzaReferee.Domain.Constants;
-using KobzaReferee.Domain.Entities;
-
-namespace KobzaReferee.Application.Helpers;
+﻿namespace KobzaReferee.Application.Helpers;
 
 public static class StandingsCalculator
 {

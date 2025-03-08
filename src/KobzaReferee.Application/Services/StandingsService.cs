@@ -1,8 +1,4 @@
-﻿using KobzaReferee.Application.Helpers;
-using KobzaReferee.Domain.Entities;
-using Microsoft.Extensions.Logging;
-
-namespace KobzaReferee.Application.Services;
+﻿namespace KobzaReferee.Application.Services;
 
 public sealed class StandingsService
 {

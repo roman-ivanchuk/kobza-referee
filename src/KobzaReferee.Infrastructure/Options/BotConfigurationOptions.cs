@@ -1,4 +1,4 @@
-﻿namespace KobzaReferee.Domain.Options;
+﻿namespace KobzaReferee.Infrastructure.Options;
 
 public class BotConfigurationOptions
 {

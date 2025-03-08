@@ -1,8 +1,4 @@
-﻿using KobzaReferee.Application.Helpers;
-using KobzaReferee.Domain.Constants;
-using KobzaReferee.Domain.Entities;
-using Microsoft.Extensions.Logging;
-using Telegram.Bot;
+﻿using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 

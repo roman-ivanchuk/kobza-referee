@@ -1,4 +1,4 @@
-﻿namespace KobzaReferee.Domain.Entities;
+﻿namespace KobzaReferee.Domain.WordGuesses;
 
 public class GuessDetail
 {
@@ -9,5 +9,6 @@ public class GuessDetail
     public string WordGuessId { get; set; } = default!;
     public WordGuess WordGuess { get; set; } = default!;
 
-    public ICollection<LetterDetail> LetterDetails { get; set; } = new List<LetterDetail>();
+    public ICollection<LetterDetail> LetterDetails { get; set; }
+        = new List<LetterDetail>();
 }

@@ -1,4 +1,4 @@
-﻿namespace KobzaReferee.Domain.Entities;
+﻿namespace KobzaReferee.Domain.WordGuesses;
 
 public class LetterDetail
 {

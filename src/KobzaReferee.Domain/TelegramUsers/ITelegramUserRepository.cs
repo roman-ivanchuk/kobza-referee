@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace KobzaReferee.Domain.Entities;
+namespace KobzaReferee.Domain.TelegramUsers;
 
 public interface ITelegramUserRepository
 {

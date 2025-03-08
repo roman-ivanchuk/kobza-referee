@@ -1,4 +1,4 @@
-using KobzaReferee.Domain.Options;
+using KobzaReferee.Infrastructure.Options;
 using Microsoft.Extensions.Options;
 
 namespace KobzaReferee.Api.Middlewares;

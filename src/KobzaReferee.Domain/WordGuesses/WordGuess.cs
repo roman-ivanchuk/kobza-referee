@@ -1,6 +1,4 @@
-﻿using KobzaReferee.Domain.Entities._Base;
-
-namespace KobzaReferee.Domain.Entities;
+﻿namespace KobzaReferee.Domain.WordGuesses;
 
 public class WordGuess : EntityBase
 {
@@ -14,5 +12,6 @@ public class WordGuess : EntityBase
     public string ChatId { get; set; } = string.Empty;
     public TelegramChat Chat { get; set; } = default!;
 
-    public ICollection<GuessDetail> Guesses { get; set; } = new List<GuessDetail>();
+    public ICollection<GuessDetail> Guesses { get; set; }
+        = new List<GuessDetail>();
 }

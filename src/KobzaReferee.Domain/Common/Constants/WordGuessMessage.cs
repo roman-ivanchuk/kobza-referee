@@ -1,4 +1,4 @@
-﻿namespace KobzaReferee.Domain.Constants;
+﻿namespace KobzaReferee.Domain.Common.Constants;
 
 public static class WordGuessMessage
 {

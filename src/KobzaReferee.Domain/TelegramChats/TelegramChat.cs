@@ -1,6 +1,4 @@
-﻿using KobzaReferee.Domain.Entities._Base;
-
-namespace KobzaReferee.Domain.Entities;
+﻿namespace KobzaReferee.Domain.TelegramChats;
 
 public class TelegramChat : EntityBase
 {
