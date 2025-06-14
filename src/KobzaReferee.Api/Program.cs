@@ -28,6 +28,7 @@ app.UseHttpsRedirection();
 app.UseMiddleware<ValidateTelegramBotMiddleware>();
 
 var botConfiguration = app.Services.GetRequiredService<IOptions<BotConfigurationOptions>>().Value;
+
 app.MapPost(botConfiguration.WebhookRoute,
     async (TelegramService telegramService,
     ILogger<Program> logger,

@@ -24,7 +24,6 @@ internal class TournamentStatisticsConfiguration
             .IsRequired();
 
         builder.Property(ts => ts.ChatId)
-            .HasConversion<long>()
             .IsRequired();
 
         builder.HasMany(ts => ts.Standings)

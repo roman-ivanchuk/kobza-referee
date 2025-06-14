@@ -30,15 +30,15 @@ public class TournamentParticipantStatistics
     /// </summary>
     public Dictionary<DateTime, int> ScoreByDate { get; set; } = new();
 
-    public string UserId { get; set; } = string.Empty;
+    public long UserId { get; set; }
     public TelegramUser User { get; set; } = default!;
 
-    public string TournamentStatisticsId { get; set; } = string.Empty;
+    public Guid TournamentStatisticsId { get; set; }
     public TournamentStatistics TournamentStatistics { get; set; } = default!;
 
     public TournamentParticipantStatistics() { }
 
-    public TournamentParticipantStatistics(string userId)
+    public TournamentParticipantStatistics(long userId)
     {
         Id = Guid.NewGuid();
         UserId = userId;

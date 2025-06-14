@@ -9,7 +9,6 @@ internal class TelegramChatConfiguration
 
         builder.Property(tc => tc.Id)
             .ValueGeneratedNever()
-            .HasConversion<long>()
             .IsRequired();
 
         builder.Property(tc => tc.Type)

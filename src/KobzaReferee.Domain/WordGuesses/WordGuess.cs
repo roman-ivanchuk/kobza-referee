@@ -1,15 +1,17 @@
 ﻿namespace KobzaReferee.Domain.WordGuesses;
 
-public class WordGuess : EntityBase
+public class WordGuess
 {
+    public Guid Id { get; set; }
+
     public DateTime Date { get; set; }
 
     public DateTime SubmittedAt { get; set; }
 
-    public string UserId { get; set; } = string.Empty;
+    public long UserId { get; set; }
     public TelegramUser User { get; set; } = default!;
 
-    public string ChatId { get; set; } = string.Empty;
+    public long ChatId { get; set; }
     public TelegramChat Chat { get; set; } = default!;
 
     public ICollection<GuessDetail> Guesses { get; set; }

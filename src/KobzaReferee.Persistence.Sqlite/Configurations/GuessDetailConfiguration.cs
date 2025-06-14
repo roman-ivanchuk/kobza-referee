@@ -16,6 +16,7 @@ internal class GuessDetailConfiguration
             .IsRequired();
 
         builder.Property(gd => gd.WordGuessId)
+            .HasConversion<string>()
             .HasMaxLength(DataSchemaConstants.GUID_LENGTH)
             .IsRequired();
 

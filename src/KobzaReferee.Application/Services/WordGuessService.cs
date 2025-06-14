@@ -90,7 +90,7 @@ public sealed class WordGuessService
         {
             telegramUser = new()
             {
-                Id = messageUser.Id.ToString(),
+                Id = messageUser.Id,
                 FirstName = messageUser.FirstName,
                 LastName = messageUser.LastName,
                 Username = messageUser.Username,
@@ -116,7 +116,7 @@ public sealed class WordGuessService
         {
             telegramChat = new()
             {
-                Id = message.Chat.Id.ToString(),
+                Id = message.Chat.Id,
                 FirstName = message.Chat.FirstName,
                 LastName = message.Chat.LastName,
                 Username = message.Chat.Username,

@@ -1,12 +1,11 @@
-﻿using KobzaReferee.Domain.Common.Interfaces;
-using KobzaReferee.Persistence.Cosmos.Extensions;
+﻿using KobzaReferee.Persistence.Cosmos.Extensions;
 using Microsoft.Azure.Cosmos.Linq;
 using System.Linq.Expressions;
 using System.Net;
 
 namespace KobzaReferee.Persistence.Cosmos.Repositories._Base;
 
-internal abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : EntityBase
+internal abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : ICosmosEntity
 {
     internal Repository(
         CosmosClient cosmosClient,
@@ -28,8 +27,8 @@ internal abstract class Repository<TEntity> : IRepository<TEntity> where TEntity
 
     protected Container Container { get; init; }
 
-    protected string GetDefaultPartitionKeyValue() => typeof(TEntity).Name;
-    protected virtual string GetPartitionKeyValue(TEntity value) => typeof(TEntity).Name;
+    protected string GetDefaultPartitionKeyValue() => typeof(TEntity).Name.Replace("CosmosEntity", string.Empty);
+    protected virtual string GetPartitionKeyValue(TEntity value) => typeof(TEntity).Name.Replace("CosmosEntity", string.Empty);
 
     public virtual async Task<TEntity> CreateAsync(
         TEntity value,
@@ -147,7 +146,7 @@ internal abstract class Repository<TEntity> : IRepository<TEntity> where TEntity
         CancellationToken cancellationToken = default)
     {
         await Container.DeleteItemAsync<TEntity>(
-            id: value.Id.ToString(),
+            id: value.id,
             partitionKey: new PartitionKey(GetPartitionKeyValue(value)),
             cancellationToken: cancellationToken);
     }
@@ -168,7 +167,7 @@ internal abstract class Repository<TEntity> : IRepository<TEntity> where TEntity
 
             valuesBatch.ToList().ForEach(value =>
             {
-                tranBatch.DeleteItem(value.Id.ToString());
+                tranBatch.DeleteItem(value.id.ToString());
             });
 
             await tranBatch.ExecuteAsync(cancellationToken);
@@ -176,4 +175,4 @@ internal abstract class Repository<TEntity> : IRepository<TEntity> where TEntity
     }
 }
 
-public interface IRepository<TEntity> where TEntity : EntityBase;
+public interface IRepository<TEntity> where TEntity : ICosmosEntity;

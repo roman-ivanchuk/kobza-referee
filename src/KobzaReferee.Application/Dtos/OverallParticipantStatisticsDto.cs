@@ -2,7 +2,7 @@
 
 public class OverallParticipantStatisticsDto
 {
-    public string UserId { get; set; } = string.Empty;
+    public long UserId { get; set; }
 
     /// <summary>
     /// Total points for the participant's standing.

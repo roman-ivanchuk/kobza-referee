@@ -9,7 +9,6 @@ internal class TelegramUserConfiguration
 
         builder.Property(tu => tu.Id)
             .ValueGeneratedNever()
-            .HasConversion<long>()
             .IsRequired();
 
         builder.Property(tu => tu.FirstName)

@@ -1,13 +1,15 @@
-﻿namespace KobzaReferee.Persistence.Cosmos.Repositories;
+﻿using System.Linq.Expressions;
 
-internal class TournamentStatisticsRepository : Repository<TournamentStatistics>, ITournamentStatisticsRepository
+namespace KobzaReferee.Persistence.Cosmos.Repositories;
+
+internal class TournamentStatisticsRepository : Repository<TournamentStatisticsCosmosEntity>, ITournamentStatisticsRepository
 {
     internal TournamentStatisticsRepository(
         CosmosClient cosmosClient,
         IOptions<AzureCosmosDbAccountOptions> options)
         : base(cosmosClient, options) { }
 
-    protected override string GetPartitionKeyValue(TournamentStatistics value) => value.ChatId;
+    protected override string GetPartitionKeyValue(TournamentStatisticsCosmosEntity value) => value.ChatId.ToString();
 
     public async Task<TournamentStatistics> SetStandingsChatMessageIdAsync(
         TournamentStatistics value,
@@ -37,8 +39,8 @@ internal class TournamentStatisticsRepository : Repository<TournamentStatistics>
         };
 
         var response = await Container.PatchItemAsync<TournamentStatistics>(
-            id: value.Id,
-            partitionKey: new PartitionKey(GetPartitionKeyValue(value)),
+            id: value.Id.ToString(),
+            partitionKey: new PartitionKey(GetPartitionKeyValue((TournamentStatisticsCosmosEntity)value)),
             patchOperations: patchOperations,
             requestOptions: requestOptions,
             cancellationToken: cancellationToken);
@@ -61,12 +63,50 @@ internal class TournamentStatisticsRepository : Repository<TournamentStatistics>
         };
 
         var response = await Container.PatchItemAsync<TournamentStatistics>(
-            id: value.Id,
-            partitionKey: new PartitionKey(GetPartitionKeyValue(value)),
+            id: value.Id.ToString(),
+            partitionKey: new PartitionKey(GetPartitionKeyValue((TournamentStatisticsCosmosEntity)value)),
             patchOperations: patchOperations,
             requestOptions: requestOptions,
             cancellationToken: cancellationToken);
 
         return response.Resource;
+    }
+
+    public Task<TournamentStatistics> CreateAsync(TournamentStatistics value, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task DeleteAsync(TournamentStatistics value, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task DeleteRangeAsync(IEnumerable<TournamentStatistics> values, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<IEnumerable<TResult>> GetAllAndMapAsync<TResult>(Expression<Func<TournamentStatistics, TResult>> selector, string? partitionKeyValue = null, Expression<Func<TournamentStatistics, bool>>? predicate = null, int? selectCount = null, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<List<TournamentStatistics>> GetAllAsync(string? partitionKeyValue = null, Expression<Func<TournamentStatistics, bool>>? predicate = null, CancellationToken cancellationToken = default)
+    {
+        var result = await base.GetAllAsync(partitionKeyValue, null, cancellationToken);
+        return result.Cast<TournamentStatistics>().ToList();
+    }
+
+    Task<TournamentStatistics?> ITournamentStatisticsRepository.GetByIdAsync(string id, string? partitionKeyValue, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<TournamentStatistics> UpsertAsync(TournamentStatistics value, CancellationToken cancellationToken = default)
+    {
+        var item = (TournamentStatisticsCosmosEntity)value;
+
+        return await base.UpsertAsync(item, cancellationToken);
     }
 }

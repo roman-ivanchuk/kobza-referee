@@ -6,7 +6,7 @@ public class GuessDetail
 
     public int AttemptNumber { get; set; }
 
-    public string WordGuessId { get; set; } = default!;
+    public Guid WordGuessId { get; set; }
     public WordGuess WordGuess { get; set; } = default!;
 
     public ICollection<LetterDetail> LetterDetails { get; set; }

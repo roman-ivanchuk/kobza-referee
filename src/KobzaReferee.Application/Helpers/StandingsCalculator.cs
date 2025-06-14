@@ -4,7 +4,7 @@ public static class StandingsCalculator
 {
     public static List<OverallParticipantStatisticsDto> CalculateOverallStandings(List<TournamentStatistics> tournaments)
     {
-        var overallParticipantsStatistics = new Dictionary<string, OverallParticipantStatisticsDto>();
+        var overallParticipantsStatistics = new Dictionary<long, OverallParticipantStatisticsDto>();
 
         foreach (var tournament in tournaments)
         {

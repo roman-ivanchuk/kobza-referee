@@ -12,7 +12,7 @@ public sealed class StandingsService
     }
 
     public async Task<TournamentStatistics> GetOrCreateTournamentAsync(
-        string chatId,
+        long chatId,
         DateTime tournamentDate,
         CancellationToken cancellationToken)
     {
@@ -26,7 +26,7 @@ public sealed class StandingsService
 
             tournament = new()
             {
-                Id = Guid.NewGuid().ToString(),
+                Id = Guid.NewGuid(),
                 ChatId = chatId,
                 StartDate = startDate,
                 EndDate = endDate,
@@ -56,12 +56,12 @@ public sealed class StandingsService
     }
 
     private async Task<TournamentStatistics?> TryGetTournamentAsync(
-        string chatId,
+        long chatId,
         DateTime tournamentDate,
         CancellationToken cancellationToken)
     {
         var tournaments = await _unitOfWork.TournamentStatistics.GetAllAsync(
-            partitionKeyValue: chatId,
+            partitionKeyValue: chatId.ToString(),
             predicate: tournament => tournamentDate >= tournament.StartDate && tournamentDate <= tournament.EndDate && tournament.ChatId == chatId,
             cancellationToken: cancellationToken);
 

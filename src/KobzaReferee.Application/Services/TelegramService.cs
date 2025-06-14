@@ -124,7 +124,7 @@ public sealed class TelegramService
         CancellationToken cancellationToken)
     {
         var tournaments = await _unitOfWork.TournamentStatistics.GetAllAsync(
-            partitionKeyValue: currentTournament.ChatId,
+            partitionKeyValue: currentTournament.ChatId.ToString(),
             predicate: ts => ts.AllDailyWordGuessesSubmitted,
             cancellationToken: cancellationToken);
 

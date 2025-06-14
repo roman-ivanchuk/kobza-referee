@@ -1,7 +1,9 @@
 ﻿namespace KobzaReferee.Domain.TelegramUsers;
 
-public class TelegramUser : EntityBase
+public class TelegramUser
 {
+    public long Id { get; set; }
+
     public bool IsBot { get; set; }
 
     public string FirstName { get; set; } = string.Empty;

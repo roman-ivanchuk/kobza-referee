@@ -3,6 +3,8 @@ global using KobzaReferee.Domain.Statistics;
 global using KobzaReferee.Domain.TelegramChats;
 global using KobzaReferee.Domain.TelegramUsers;
 global using KobzaReferee.Domain.WordGuesses;
+global using KobzaReferee.Persistence.Cosmos.Common.Interfaces;
+global using KobzaReferee.Persistence.Cosmos.Entities;
 global using KobzaReferee.Persistence.Cosmos.Options;
 global using KobzaReferee.Persistence.Cosmos.Repositories;
 global using KobzaReferee.Persistence.Cosmos.Repositories._Base;

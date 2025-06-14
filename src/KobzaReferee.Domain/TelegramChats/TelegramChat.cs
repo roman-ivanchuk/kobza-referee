@@ -1,7 +1,9 @@
 ﻿namespace KobzaReferee.Domain.TelegramChats;
 
-public class TelegramChat : EntityBase
+public class TelegramChat
 {
+    public long Id { get; set; }
+
     public string Type { get; set; } = string.Empty;
 
     public string? Title { get; set; }

@@ -1,7 +1,9 @@
 ﻿namespace KobzaReferee.Domain.Statistics;
 
-public class TournamentStatistics : EntityBase
+public class TournamentStatistics
 {
+    public Guid Id { get; set; }
+
     /// <summary>
     /// The ID of the chat message that contains the standings of the tournament.
     /// </summary>
@@ -27,7 +29,7 @@ public class TournamentStatistics : EntityBase
     /// </summary>
     public bool AllDailyWordGuessesSubmitted { get; set; }
 
-    public string ChatId { get; set; } = string.Empty;
+    public long ChatId { get; set; }
     public TelegramChat Chat { get; set; } = default!;
 
     public ICollection<TournamentParticipantStatistics> Standings { get; set; }

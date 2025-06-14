@@ -35,7 +35,7 @@ internal static class WordGuessParser
 
         var wordGuess = new WordGuess
         {
-            Id = Guid.NewGuid().ToString(),
+            Id = Guid.NewGuid(),
             Date = parsedDate,
             Guesses = new List<GuessDetail>()
         };

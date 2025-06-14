@@ -32,7 +32,6 @@ internal class TournamentParticipantStatisticsConfiguration
             .IsRequired();
 
         builder.Property(tps => tps.UserId)
-            .HasConversion<long>()
             .IsRequired();
 
         builder.Property(tps => tps.TournamentStatisticsId)

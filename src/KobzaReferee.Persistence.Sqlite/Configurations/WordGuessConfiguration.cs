@@ -21,11 +21,9 @@ internal class WordGuessConfiguration
             .IsRequired();
 
         builder.Property(wg => wg.ChatId)
-            .HasConversion<long>()
             .IsRequired();
 
         builder.Property(wg => wg.UserId)
-            .HasConversion<long>()
             .IsRequired();
 
         builder.HasMany(wg => wg.Guesses)

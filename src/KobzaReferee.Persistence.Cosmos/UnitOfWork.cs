@@ -4,6 +4,7 @@ internal class UnitOfWork : IUnitOfWork
 {
     private readonly CosmosClient _cosmosClient;
     private readonly IOptions<AzureCosmosDbAccountOptions> _options;
+
     private ITelegramChatRepository? _telegramChats;
     private ITelegramUserRepository? _telegramUsers;
     private ITournamentStatisticsRepository? _tournamentStatistics;
